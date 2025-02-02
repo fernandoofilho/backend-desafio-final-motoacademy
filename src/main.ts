@@ -16,6 +16,17 @@ async function bootstrap() {
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api-docs', app, document);
+  app.use((req, res, next) => {
+    console.info(`Request Method: ${req.method}`);
+    console.info(`Request URL: ${req.originalUrl}`);
+    console.info(`Request Headers: ${JSON.stringify(req.headers)}`);
+
+    req.on('data', (chunk) => {
+      console.info(`Request Body: ${chunk}`);
+    });
+
+    next();
+  });
 
   await app.listen(process.env.PORT ?? 3000);
 }
