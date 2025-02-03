@@ -4,7 +4,7 @@ WORKDIR /data/db
 
 VOLUME [ "/data/db" ]
 
-COPY motorola_phones_processed.json /docker-entrypoint-initdb.d/motorola_phones_data.json
+COPY motorola_phones_processed.json /docker-entrypoint-initdb.d/motorola_phones_processed.json
 COPY init-db.sh /docker-entrypoint-initdb.d/init-db.sh
 
 RUN chmod +x /docker-entrypoint-initdb.d/init-db.sh

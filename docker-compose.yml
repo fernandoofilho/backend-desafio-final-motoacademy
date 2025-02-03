@@ -2,6 +2,7 @@ version: '3.9'
 
 services:
   app:
+    container_name: api
     build:
       context: .
       dockerfile: Dockerfile
@@ -11,12 +12,15 @@ services:
       - database
     environment:
       - NODE_ENV=production
+      - MONGO_HOST=mongodb://mongodb:27017/moto-academy 
     volumes:
       - .:/app
       - /app/node_modules
     restart: always
 
   database:
+    container_name: mongodb
+
     build:
       context: ./database
       dockerfile: Dockerfile

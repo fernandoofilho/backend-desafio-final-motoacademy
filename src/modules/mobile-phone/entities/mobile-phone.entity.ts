@@ -16,3 +16,4 @@ export class MobilePhone {
 }
 
 export const MobilePhoneSchema = SchemaFactory.createForClass(MobilePhone);
+MobilePhoneSchema.index({ Model: 1 }, { unique: false });
