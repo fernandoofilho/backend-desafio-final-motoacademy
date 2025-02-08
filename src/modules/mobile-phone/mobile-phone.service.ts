@@ -13,6 +13,9 @@ export class MobilePhoneService {
   async findAll(): Promise<MobilePhone[]> {
     return this.telefoneModel.find().exec();
   }
+  async findAny(): Promise<MobilePhone[]> {
+    return this.telefoneModel.aggregate([{ $sample: { size: 5 } }]);
+  }
 
   async findByModel(modelo: string): Promise<MobilePhone[]> {
     const regex = new RegExp(modelo, 'i');

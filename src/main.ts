@@ -16,6 +16,7 @@ async function bootstrap() {
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api-docs', app, document);
+
   app.use((req, res, next) => {
     console.info(`Request Method: ${req.method}`);
     console.info(`Request URL: ${req.originalUrl}`);
@@ -27,7 +28,14 @@ async function bootstrap() {
 
     next();
   });
-
+  const allowedOrigin = process.env.APP_CLIENT || '*';
+  app.enableCors({
+    origin: allowedOrigin,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+    allowedHeaders: 'Content-Type, Authorization',
+  });
+  console.log(allowedOrigin);
   await app.listen(process.env.PORT ?? 3000);
 }
 void bootstrap();

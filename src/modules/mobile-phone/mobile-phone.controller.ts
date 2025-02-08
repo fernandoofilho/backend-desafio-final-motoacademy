@@ -36,4 +36,8 @@ export class MobilePhoneController {
   ): Promise<MobilePhone[]> {
     return this.mobilePhoneService.findBySpecsField(field, value);
   }
+  @Get('random')
+  async findAny(): Promise<MobilePhone[]> {
+    return this.mobilePhoneService.findAny();
+  }
 }

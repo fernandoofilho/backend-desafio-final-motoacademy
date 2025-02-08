@@ -1,6 +1,6 @@
 import { Prop, SchemaFactory, Schema } from '@nestjs/mongoose';
 
-@Schema({ collection: 'motorola-phones' })
+@Schema({ collection: 'device-data' })
 export class MobilePhone {
   @Prop()
   Model: string;

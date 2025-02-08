@@ -12,3 +12,4 @@ RUN chmod +x /docker-entrypoint-initdb.d/init-db.sh
 EXPOSE 27017:27017
 
 CMD ["/docker-entrypoint-initdb.d/init-db.sh"]
+
