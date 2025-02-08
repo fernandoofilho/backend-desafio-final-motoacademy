@@ -9,7 +9,7 @@ import { MobilePhoneModule } from './modules/mobile-phone/mobile-phone.module';
     ConfigModule.forRoot(),
     MobilePhoneModule,
     MongooseModule.forRoot(
-      'mongodb+srv://developer:MotoAcademy2025@moto-device.gbmza.mongodb.net/moto-device?retryWrites=true&w=majority',
+      process.env.MONGO_HOST || 'mongodb://localhost:27017/moto-academy',
     ),
   ],
   controllers: [AppController],
