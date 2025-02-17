@@ -1,6 +1,7 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { MobilePhoneService } from './mobile-phone.service';
 import { MobilePhone } from './entities/mobile-phone.entity';
+import { DeviceTypes } from 'src/shared/enums/deviceTypes';
 
 @Controller('mobile-phone')
 export class MobilePhoneController {
@@ -39,5 +40,21 @@ export class MobilePhoneController {
   @Get('random')
   async findAny(): Promise<MobilePhone[]> {
     return this.mobilePhoneService.findAny();
+  }
+
+  @Get('search/model')
+  async findByDeviceType(
+    @Query('deviceType') model: DeviceTypes,
+  ): Promise<MobilePhone[]> {
+    return this.mobilePhoneService.findByModel(model);
+  }
+
+  @Get('search/filter')
+  async searchFilter(
+    @Query('search') search: string,
+    @Query('group') group: string,
+    @Query('year') year: string,
+  ): Promise<MobilePhone[]> {
+    return this.mobilePhoneService.findByFilter(search, group, year);
   }
 }
