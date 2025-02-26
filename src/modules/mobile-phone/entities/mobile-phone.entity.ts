@@ -1,11 +1,21 @@
 import { Prop, SchemaFactory, Schema } from '@nestjs/mongoose';
 
+<<<<<<< HEAD
+@Schema({ collection: 'motodevice-data' })
+=======
 @Schema({ collection: 'device-data' })
+>>>>>>> main
 export class MobilePhone {
   @Prop()
   Model: string;
 
   @Prop()
+<<<<<<< HEAD
+  src: string;
+
+  @Prop()
+=======
+>>>>>>> main
   Added: string;
 
   @Prop({ type: Object })
