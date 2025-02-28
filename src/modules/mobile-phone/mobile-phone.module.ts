@@ -3,8 +3,10 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { MobilePhoneService } from './mobile-phone.service';
 import { MobilePhoneController } from './mobile-phone.controller';
 import { MobilePhone, MobilePhoneSchema } from './entities/mobile-phone.entity';
+import { UtilsModule } from 'src/services/utils.module';
 @Module({
   imports: [
+    UtilsModule,
     MongooseModule.forFeature([
       { name: MobilePhone.name, schema: MobilePhoneSchema },
     ]),
