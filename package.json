@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "nest build",
-    "postbuild": "cp -r src/assets dist/",  
+    "postbuild": "cp -r src/assets dist/",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
@@ -21,6 +21,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@nestjs/axios": "^4.0.0",
     "@nestjs/common": "^11.0.1",
     "@nestjs/config": "^4.0.0",
     "@nestjs/core": "^11.0.1",
@@ -28,6 +29,7 @@
     "@nestjs/mongoose": "^11.0.1",
     "@nestjs/platform-express": "^11.0.11",
     "@nestjs/swagger": "^11.0.3",
+    "axios": "^1.8.1",
     "mongoose": "^8.9.6",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
