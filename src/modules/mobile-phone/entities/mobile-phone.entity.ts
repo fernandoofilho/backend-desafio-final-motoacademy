@@ -1,8 +1,12 @@
 import { Prop, SchemaFactory, Schema } from '@nestjs/mongoose';
-import { Entity } from 'src/interfaces/entity';
+import { Entity } from 'src/shared/interfaces/entity';
+import { ObjectIdColumn } from 'typeorm';
 
 @Schema({ collection: 'motodevice-data' })
 export class MobilePhone implements Entity {
+  @ObjectIdColumn()
+  _id: string;
+
   @Prop()
   Model: string;
 

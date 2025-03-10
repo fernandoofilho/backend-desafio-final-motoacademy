@@ -8,7 +8,6 @@ export class FindImgService {
 
   findImage(filename: string): string {
     const filePath = path.join(this.imgDirectory, `${filename}`);
-    console.log(filePath);
     if (fs.existsSync(filePath)) {
       return fs.readFileSync(filePath, 'base64');
     }
