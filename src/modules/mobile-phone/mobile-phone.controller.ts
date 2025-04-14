@@ -27,10 +27,10 @@ export class MobilePhoneController {
     @Query('year') year?: string,
     @Query('group') group?: string,
     @Query('cores') cores?: string,
-    // @Query('storage') storage?: string,
+    @Query('storage') storage?: string,
     @Query('isPhone') isPhone?: string,
   ): Promise<MobilePhone[]> {
-    return this.mobilePhoneService.search({ search, year, group, isPhone });
+    return this.mobilePhoneService.search({ search, year, group, storage, isPhone });
   }
   @Get('search/model')
   async findByModel(@Query('model') model: string): Promise<MobilePhone[]> {

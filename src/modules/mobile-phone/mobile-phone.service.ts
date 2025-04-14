@@ -40,43 +40,64 @@ export class MobilePhoneService {
       .find({ Added: { $regex: date, $options: 'i' } })
       .exec();
   }
-
   async search(filters: {
     search?: string;
     year?: string;
     group?: string;
     isPhone?: string;
+    storage?: string; 
+    manufacturer?: string; 
   }): Promise<MobilePhone[]> {
-    let result: MobilePhone[];
-
-    if (filters.year) {
-      result = await this.findByReleaseYear(filters.year);
-    } else {
-      result = await this.findAll();
-    }
-
-    if (filters.search) {
-      const searchLower = filters.search.toLowerCase();
-      result = result.filter((phone) =>
-        phone.Model.toLowerCase().includes(searchLower),
-      );
-    }
-
-    if (filters.group) {
-      const groupLower = filters.group.toLowerCase();
-      result = result.filter((phone) =>
-        phone.Model.toLowerCase().includes(groupLower),
-      );
-    }
-
-    if (filters.isPhone === 'false') {
-      result = result.filter((phone) =>
-        phone.Model.toLowerCase().includes('watch'),
-      );
-    }
-
+    let result: MobilePhone[] = filters.year
+      ? await this.findByReleaseYear(filters.year)
+      : await this.findAll();
+  
+    const searchLower = filters.search?.toLowerCase();
+    const groupLower = filters.group?.toLowerCase();
+    const isPhone = filters.isPhone;
+    const storageFilter = filters.storage;
+    const manufacturerLower = filters.manufacturer?.toLowerCase();
+  
+    result = result.filter((phone) => {
+      const modelLower = phone.Model.toLowerCase();
+  
+      if (searchLower && !modelLower.includes(searchLower)) {
+        return false;
+      }
+  
+      if (groupLower && !modelLower.includes(groupLower)) {
+        return false;
+      }
+  
+      if (isPhone === 'false' && !modelLower.includes('watch')) {
+        return false;
+      }
+      if (isPhone === 'true' && modelLower.includes('watch')) {
+        return false;
+      }
+  
+      if (
+        storageFilter &&
+        !phone.specs?.['Non-volatile Memory Capacity (converted)']
+          ?.toString()
+          .includes(storageFilter)
+      ) {
+        return false;
+      }
+  
+      if (
+        manufacturerLower &&
+        !phone.info?.Manufacturer?.toLowerCase().includes(manufacturerLower)
+      ) {
+        return false;
+      }
+  
+      return true;
+    });
+  
     return result;
   }
+  
 
   async findByInfoField(field: string, value: string): Promise<MobilePhone[]> {
     return this.telefoneModel.find({ [`info.${field}`]: value }).exec();
